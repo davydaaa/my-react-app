@@ -340,7 +340,7 @@ label {
   text-align: center;
   max-width: 100%;
   border-radius: 10px;
-  height: 350px; 
+  height: 400px; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -395,4 +395,30 @@ select option:checked {
 .search input {
   height: 30px;
   margin-right: 10px;
+}
+
+.product-details-page {
+  padding: 20px;
+}
+
+.product-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-details img {
+  height: 500px;
+}
+
+.product-footer {
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-footer .buttons {
+  width: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
