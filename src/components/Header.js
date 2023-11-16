@@ -1,22 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 
 function Header() {
   return (
     <header>
       <div id="logo_name">
-        <img src="/schoolpen.png" alt="schoolpen" />
+      <img src="/schoolpen.png" alt="schoolpen" />
+      <p>SchoolPen</p>
       </div>
       <nav>
         <div className="nav-item">
-          <a href="#">Home</a>
+          <Link to="/">Home</Link> 
         </div>
         <div className="nav-item">
-          <a href="#">Catalog</a>
+          <Link to="/catalog">Catalog</Link> 
         </div>
         <div className="nav-item">
-          <a href="#">Cart</a>
+          <Link to="/cart">Cart</Link>
         </div>
       </nav>
+      <div className="search">
+        <input type="text" placeholder="Search..." />
+        <button type="submit">Search</button>
+      </div>
     </header>
   );
 }

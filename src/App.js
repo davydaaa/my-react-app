@@ -1,19 +1,52 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
+import CatalogPage from './components/CatalogPage';
+import SortingOptions from './components/SortingOptions';
 import Navigation from './components/Navigation';
 import SchoolPenTypes from './components/SchoolPenTypes';
-import Footer from './components/Footer';
+import productsData from './components/productsData';
+
+
 import './App.css';
 
 function App() {
+  const [sortType, setSortType] = useState('priceAsc'); 
+
+  const handleSortChange = (selectedSortType) => {
+    setSortType(selectedSortType); 
+  };
+
   return (
-    <div className="App">
-      <Header />
-      <Navigation />
-      <SchoolPenTypes />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <React.Fragment>
+                <Header />
+                <Navigation />
+                <SchoolPenTypes/>
+                <Footer />
+              </React.Fragment>
+            }
+          />
+          <Route
+            path="/catalog"
+            element={
+              <React.Fragment>
+                <Header />
+                <SortingOptions onSortChange={handleSortChange} />
+                <CatalogPage products={productsData} sortType={sortType} />
+                <Footer />
+              </React.Fragment>
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -7,7 +7,7 @@ function SchoolPenList({ schoolpenTypes }) {
   return (
     <div className="schoolpen-types">
       <div className="schoolpen-column">
-        {schoolpenTypesTypes.map((schoolpen) => (
+        {schoolpenTypes.map((schoolpen) => (
           <NewSchoolPenComponent key={schoolpen.id} schoolpen={schoolpen} />
         ))}
       </div>
