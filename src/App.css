@@ -435,3 +435,36 @@ select option:checked {
   margin: 10px 0;
 }
 
+.cart-item {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+
+.cart-name {
+  display: flex;
+  align-items: center;
+}
+
+.cart-name img {
+  width: 10%;
+}
+
+.item-details {
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.cart-buttons {
+  display: flex;
+  justify-content: space-between;
+}
