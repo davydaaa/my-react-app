@@ -12,7 +12,6 @@ body {
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
@@ -25,6 +24,7 @@ header {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  border-radius: 20px;
 }
 
 .nav-item {
@@ -43,8 +43,8 @@ header {
 }
 
 .nav-item a:hover {
-  background-color: #4CAF50;
-  border-color: #4CAF50;
+  background-color: #af4c4c;
+  border-color: #af4c4c;
   color: white;
 }
 
@@ -73,7 +73,6 @@ header::after {
   display: block;
   width: 100%;
   height: 2px;
-  background-color: black;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -81,6 +80,7 @@ header::after {
 
 /* Additional styles for Navigation */
 .schoolpens-info {
+  padding: 20px 0;
   display: flex;
   align-items: center;
 }
@@ -103,9 +103,10 @@ header::after {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #af4c4c;
   color: #fff;
   border: none;
+  border-radius: 20px;
   padding: 10px 20px;
   margin: 10px 0;
   cursor: pointer;
@@ -137,11 +138,13 @@ button {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #af4c4c;
   color: #fff;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 20px;
+
 }
 
 button:hover {
@@ -166,9 +169,9 @@ button:hover {
 }
 
 .schoolpen-column{
-  flex-direction: column-reverse;
   flex-direction: row;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
 }
@@ -183,7 +186,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(33.33% - 20px); 
+  width: 25%; 
   margin-bottom: 20px;
 }
 
@@ -203,7 +206,7 @@ button:hover {
 }
 
 .view-more {
-  background-color: #4CAF50;
+  background-color: #af4c4c;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -224,6 +227,8 @@ footer {
   color: #fff;
   text-align: center;
   padding: 20px;
+  border-radius: 20px;
+
 }
 
 .footer-content {
@@ -305,7 +310,6 @@ footer {
 .sorting-options {
   display: flex;
   align-items: center;
-  border-bottom: 2px solid black;
   padding: 10px;
 }
 
@@ -315,6 +319,7 @@ footer {
 }
 
 label {
+  color: white;
   margin-right: 10px;
   font-size: 16px;
 }
@@ -345,6 +350,7 @@ label {
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 40px;
+  align-items: center;
 }
 
 .product-card img {
@@ -354,21 +360,21 @@ label {
 }
 
 .view-more-button {
-  background-color: #4CAF50;
+  background-color: #af4c4c;
   color: #fff;
   border: none;
-  width: 50%;
   padding: 10px 20px;
   margin: 10px auto;
   cursor: pointer;
+  border-radius: 20px;
+
 }
 
 .sorting-options {
   margin-top: 10px;
   padding: 8px 12px; 
-  border: 2px solid #000000; 
-  border-radius: 5px; 
-  background-color: #fff; 
+  border-radius: 15px; 
+  background-color: #333333; 
   color: #000000; 
   font-size: 14px; 
 }
@@ -402,16 +408,18 @@ select option:checked {
 }
 
 .product-details {
+  padding: 0 50px;
+  padding-top: 20px;
   display: flex;
   justify-content: space-between;
 }
 
 .product-details img {
-  height: 500px;
+  width: 50%;
 }
 
 .product-footer {
-  padding: 0 40px;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
 }
@@ -422,3 +430,8 @@ select option:checked {
   align-items: center;
   justify-content: space-between;
 }
+
+.search {
+  margin: 10px 0;
+}
+

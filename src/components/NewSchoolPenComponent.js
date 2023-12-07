@@ -1,7 +1,6 @@
-
 import React from 'react';
 
-function NewSchoolPenComponent({ camera }) {
+function NewSchoolPenComponent({ schoolpen }) {
   return (
     <div className="schoolpen">
       <img src={schoolpen.image} alt={schoolpen.name} />

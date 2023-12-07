@@ -19,10 +19,6 @@ function Header() {
           <Link to="/cart">Cart</Link>
         </div>
       </nav>
-      <div className="search">
-        <input type="text" placeholder="Search..." />
-        <button type="submit">Search</button>
-      </div>
     </header>
   );
 }

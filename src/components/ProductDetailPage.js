@@ -1,5 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
 
 function ProductDetailPage({ products, addToCart }) {
   const { productId } = useParams();
@@ -11,26 +13,30 @@ function ProductDetailPage({ products, addToCart }) {
   }
 
   const handleAddToCart = () => {
-    // Logic to add the product to the cart
+    // Логіка додавання продукту в кошик
     addToCart(product);
   };
 
   return (
     <div className="product-detail-page">
+      <Header />
       <div className="product-details">
-      <img src={product.image} alt={product.name} />
-        <div className='product-description'>
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
+        <img src={product.image} alt={product.name} />
+        <div className="product-description">
+          <h1>{product.name}</h1>
+          <p>{product.description}</p>
         </div>
       </div>
       <div className="product-footer">
         <p>Price: ${product.price}</p>
         <div className="buttons">
-          <Link to="/catalog"><button className="go-back-button" >Go Back</button></Link>
+          <Link to="/catalog">
+            <button className="go-back-button">Go Back</button>
+          </Link>
           <button onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
