@@ -1,9 +1,14 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
 
 function CatalogPage({ products, sortType, addToCart }) {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const sortProducts = (a, b) => {
     if (sortType === 'priceAsc') {
       return a.price - b.price;
@@ -22,19 +27,31 @@ function CatalogPage({ products, sortType, addToCart }) {
   return (
     <div className="catalog-page">
       <h1>Catalog</h1>
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+      </div>
       <div className="product-list">
-        {sortedProducts.map((product) => (
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <Link to={`/product/${product.id}`}>
-              <button className="view-more-button">View More</button>
-            </Link>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
-          </div>
-        ))}
+        {sortedProducts
+          .filter((product) =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+          .map((product) => (
+            <div key={product.id} className="product-card">
+              <img src={product.image} alt={product.name} />
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
+              <Link to={`/product/${product.id}`}>
+                <button className="view-more-button">View More</button>
+              </Link>
+              <button onClick={() => addToCart(product)}>Add to Cart</button>
+            </div>
+          ))}
       </div>
     </div>
   );
