@@ -24,7 +24,7 @@ header {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
 }
 
 .nav-item {
@@ -178,10 +178,9 @@ button:hover {
 
 .schoolpen {
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #000000;
+  border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -227,7 +226,7 @@ footer {
   color: #fff;
   text-align: center;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 0 0 20px 20px;
 
 }
 
@@ -371,9 +370,8 @@ label {
 }
 
 .sorting-options {
-  margin-top: 10px;
   padding: 8px 12px; 
-  border-radius: 15px; 
+  border-radius: 0 0 20px 20px; 
   background-color: #333333; 
   color: #000000; 
   font-size: 14px; 
@@ -468,3 +466,4 @@ select option:checked {
   display: flex;
   justify-content: space-between;
 }
+

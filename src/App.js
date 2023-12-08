@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CatalogPage from './components/CatalogPage';
-import ShoppingCartPage from './components/ShoppingCartPage';  // Додаємо ShoppingCartPage
+import ShoppingCartPage from './components/ShoppingCartPage'; 
 import SortingOptions from './components/SortingOptions';
 import Navigation from './components/Navigation';
 import SchoolPenTypes from './components/SchoolPenTypes';
@@ -22,17 +22,14 @@ function App() {
   };
 
   const addToCart = (product) => {
-    // Логіка для додавання продукту до корзини
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
 
       if (existingItem) {
-        // Якщо товар вже є в корзині, збільшуємо кількість
         return prevCart.map((item) =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        // Якщо товару немає в корзині, додаємо новий
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
@@ -43,9 +40,7 @@ function App() {
   };
 
   const checkout = (total) => {
-    // Логіка для оформлення замовлення, наприклад, виведення вікна "Success"
     alert(`Your order of total $${total} was sent for processing.`);
-    // Очищаємо корзину після успішного замовлення
     setCart([]);
   };
 

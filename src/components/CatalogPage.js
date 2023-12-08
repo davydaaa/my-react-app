@@ -1,3 +1,4 @@
+// CatalogPage.js
 import React, { useState } from 'react';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
@@ -24,6 +25,11 @@ function CatalogPage({ products, sortType, addToCart }) {
 
   const sortedProducts = [...products].sort(sortProducts);
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    alert('Product added to cart!');
+  };
+
   return (
     <div className="catalog-page">
       <h1>Catalog</h1>
@@ -49,7 +55,7 @@ function CatalogPage({ products, sortType, addToCart }) {
               <Link to={`/product/${product.id}`}>
                 <button className="view-more-button">View More</button>
               </Link>
-              <button onClick={() => addToCart(product)}>Add to Cart</button>
+              <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
             </div>
           ))}
       </div>

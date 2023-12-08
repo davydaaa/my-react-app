@@ -13,7 +13,6 @@ function ProductDetailPage({ products, addToCart }) {
   }
 
   const handleAddToCart = () => {
-    // Логіка додавання продукту в кошик
     addToCart(product);
   };
 
