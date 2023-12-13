@@ -22,6 +22,11 @@ function ShoppingCartPage({ cart, removeFromCart, checkout }) {
     );
   };
 
+  // Функція для форматування ціни з двома цифрами після коми
+  const formatPrice = (price) => {
+    return price.toFixed(2);
+  };
+
   return (
     <div className="shopping-cart-page">
       <Header cartCount={cart.length} />
@@ -38,7 +43,7 @@ function ShoppingCartPage({ cart, removeFromCart, checkout }) {
         ))}
       </div>
       <div className="total-price">
-        <p>Total: ${calculateTotal()}</p>
+        <p>Total: ${formatPrice(calculateTotal())}</p>
       </div>
       <div className="cart-buttons">
         <button onClick={() => checkout(calculateTotal())}>Continue</button>

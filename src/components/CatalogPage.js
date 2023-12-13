@@ -64,3 +64,5 @@ function CatalogPage({ products, sortType, addToCart }) {
 }
 
 export default CatalogPage;
+
+
