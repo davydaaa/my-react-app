@@ -2,6 +2,11 @@
 import React from 'react';
 
 function CartItem({ item, quantity, onQuantityChange, removeFromCart }) {
+  // Функція для форматування ціни з двома цифрами після коми
+  const formatPrice = (price) => {
+    return price.toFixed(2);
+  };
+
   return (
     <div className="cart-item">
       <div className='cart-name'>
@@ -14,7 +19,7 @@ function CartItem({ item, quantity, onQuantityChange, removeFromCart }) {
           <span>{quantity}</span>
           <button onClick={() => onQuantityChange(quantity + 1)}>+</button>
         </div>
-        <p>${item.price * quantity}</p>
+        <p>${formatPrice(item.price * quantity)}</p>
       </div>
       <button onClick={() => removeFromCart(item.id)}>Remove</button>
     </div>

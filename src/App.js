@@ -1,10 +1,10 @@
-// App.js (додаємо роут для ShoppingCartPage)
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// App.js
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CatalogPage from './components/CatalogPage';
-import ShoppingCartPage from './components/ShoppingCartPage'; 
+import ShoppingCartPage from './components/ShoppingCartPage';
 import SortingOptions from './components/SortingOptions';
 import Navigation from './components/Navigation';
 import SchoolPenTypes from './components/SchoolPenTypes';
@@ -15,7 +15,10 @@ import './App.css';
 
 function App() {
   const [sortType, setSortType] = useState('priceAsc');
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem('cart');
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
 
   const handleSortChange = (selectedSortType) => {
     setSortType(selectedSortType);
@@ -33,6 +36,8 @@ function App() {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
+
+    alert('Product added to cart!');
   };
 
   const removeFromCart = (productId) => {
@@ -40,12 +45,16 @@ function App() {
   };
 
   const checkout = (total) => {
-    alert(`Your order of total $${total} was sent for processing.`);
+    alert(`Your order of total $${total.toFixed(2)} was sent for processing.`);
     setCart([]);
   };
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
         <Routes>
           <Route
@@ -90,7 +99,7 @@ function App() {
           />
         </Routes>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

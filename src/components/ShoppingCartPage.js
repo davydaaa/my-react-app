@@ -1,18 +1,27 @@
 // ShoppingCartPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import CartItem from './CartItem';
 
 function ShoppingCartPage({ cart, removeFromCart, checkout }) {
-  const [quantityMap, setQuantityMap] = useState({});
+  const [quantityMap, setQuantityMap] = useState(() => {
+    const storedQuantityMap = localStorage.getItem('quantityMap');
+    return storedQuantityMap ? JSON.parse(storedQuantityMap) : {};
+  });
 
   const handleQuantityChange = (productId, newQuantity) => {
-    setQuantityMap((prevQuantityMap) => ({
-      ...prevQuantityMap,
-      [productId]: newQuantity,
-    }));
+    setQuantityMap((prevQuantityMap) => {
+      const updatedQuantityMap = {
+        ...prevQuantityMap,
+        [productId]: newQuantity,
+      };
+
+      localStorage.setItem('quantityMap', JSON.stringify(updatedQuantityMap));
+
+      return updatedQuantityMap;
+    });
   };
 
   const calculateTotal = () => {
@@ -21,6 +30,11 @@ function ShoppingCartPage({ cart, removeFromCart, checkout }) {
       0
     );
   };
+
+  useEffect(() => {
+    // Зберігаємо корзину в localStorage при зміні
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <div className="shopping-cart-page">
@@ -38,7 +52,7 @@ function ShoppingCartPage({ cart, removeFromCart, checkout }) {
         ))}
       </div>
       <div className="total-price">
-        <p>Total: ${calculateTotal()}</p>
+        <p>Total: ${calculateTotal().toFixed(2)}</p>
       </div>
       <div className="cart-buttons">
         <button onClick={() => checkout(calculateTotal())}>Continue</button>
