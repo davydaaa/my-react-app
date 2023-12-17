@@ -1,68 +1,76 @@
 // CatalogPage.js
-import React, { useState } from 'react';
-import ProductCard from './ProductCard';
+import React, { useState, useEffect } from 'react';
+import NewSchoolPenComponent from './NewSchoolPenComponent';
 import { Link } from 'react-router-dom';
 
-function CatalogPage({ products, sortType, addToCart }) {
-  const [searchTerm, setSearchTerm] = useState('');
+function CatalogPage({ addToCart }) {
+  const initialVisibleCount = 3;
+  const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [schoolpenTypes, setSchoolpenTypes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  useEffect(() => {
+    fetch('http://localhost:8080/api/schoolpenTypes')
+      .then(response => response.json())
+      .then(data => {
+        setSchoolpenTypes(data);
+        setIsLoading(false); // Set loading to false when data is fetched
+      })
+      .catch(error => {
+        console.error('Error fetching schoolpen types:', error);
+        setIsLoading(false); // Set loading to false in case of an error
+      });
+  }, []);
 
-  const sortProducts = (a, b) => {
-    if (sortType === 'priceAsc') {
-      return a.price - b.price;
-    } else if (sortType === 'priceDesc') {
-      return b.price - a.price;
-    } else if (sortType === 'nameAsc') {
-      return a.name.localeCompare(b.name);
-    } else if (sortType === 'nameDesc') {
-      return b.name.localeCompare(a.name);
+  const handleViewMoreClick = () => {
+    if (isExpanded) {
+      setVisibleCount(initialVisibleCount);
+    } else {
+      setVisibleCount(schoolpenTypes.length);
     }
-    return 0;
+    setIsExpanded(prevExpanded => !prevExpanded);
   };
-
-  const sortedProducts = [...products].sort(sortProducts);
 
   const handleAddToCart = (product) => {
     addToCart(product);
     alert('Product added to cart!');
   };
 
+  const staticImage = '/schoolpen.png'; // Replace with your actual static image path
+
   return (
     <div className="catalog-page">
-      <h1>Catalog</h1>
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-      </div>
-      <div className="product-list">
-        {sortedProducts
-          .filter((product) =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-          .map((product) => (
-            <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <p>Price: ${product.price}</p>
-              <Link to={`/product/${product.id}`}>
-                <button className="view-more-button">View More</button>
-              </Link>
-              <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
+      {isLoading ? (
+        // Display loader while data is being fetched
+        <div className="loader">Loading...</div>
+      ) : (
+        <div>
+          <div className="catalog-column">
+            {schoolpenTypes.slice(0, visibleCount).map(schoolpen => (
+              <div key={schoolpen.id} className="product-card">
+                <img src={schoolpen.image || staticImage} alt={schoolpen.name} />
+                <h3>{schoolpen.name}</h3>
+                <p>{schoolpen.description}</p>
+                <p>Price: ${schoolpen.price}</p>
+                <Link to={`/product/${schoolpen.id}`}>
+                  <button className="view-more-button">View More</button>
+                </Link>
+                <button onClick={() => handleAddToCart(schoolpen)}>Add to Cart</button>
+              </div>
+            ))}
+          </div>
+          {visibleCount < schoolpenTypes.length && (
+            <div className="view-more-container">
+              <button className="view-more" onClick={handleViewMoreClick}>
+                {isExpanded ? 'View Less' : 'View More'}
+              </button>
             </div>
-          ))}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
 export default CatalogPage;
-
-

@@ -524,3 +524,9 @@ select option:checked {
     box-shadow: 0 2.5em 0 0;
   }
 }
+
+.catalog-column {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}

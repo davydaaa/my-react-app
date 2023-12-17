@@ -14,11 +14,11 @@ class SchoolpenController {
 
     async createSchoolpenType(req, res) {
         try {
-            const { name, description } = req.body;
+            const { name, description, price } = req.body;
 
             const newSchoolpenType = await db.query(
-                'INSERT INTO schoolpenTypes (name, description) VALUES (?, ?)',
-                [name, description]
+                'INSERT INTO schoolpenTypes (name, description, price) VALUES (?, ?, ?)',
+                [name, description, price]
             );
 
             const newSchoolpenTypeId = newSchoolpenType[0].insertId;
@@ -50,10 +50,10 @@ class SchoolpenController {
 
     async updateSchoolpenType(req, res) {
         try {
-            const { id, name, description } = req.body;
+            const { id, name, description, price } = req.body;
             await db.query(
-                'UPDATE schoolpenTypes SET name = ?, description = ? WHERE id = ?',
-                [name, description, id]
+                'UPDATE schoolpenTypes SET name = ?, description = ?, price = ? WHERE id = ?',
+                [name, description, price, id]
             );
 
             const updatedSchoolpenType = await db.query('SELECT * FROM schoolpenTypes WHERE id = ?', [id]);
